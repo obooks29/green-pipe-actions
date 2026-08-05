@@ -18,26 +18,21 @@ jobs:
       # Updated Permissions
       # Required to allow actions/checkout to clone the repository onto the runner
       contents: read
-     # Required to allow the vitest coverage action to write a comment into the pull request
+      # Required to allow the vitest coverage action to write a comment into the pull request
       pull-requests: write
-
-    #strategy:
-     # matrix:
-     #   node-version: [18.x, 20.x, 22.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
     - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Use Node.js 22.x
       uses: actions/setup-node@v4
       with:
-        node-version: 22.x #${{ matrix.node-version }}
+        node-version: 22.x 
         cache: 'npm'
     - run: npm ci
     - run: npm run build --if-present
     
     
-        # ... New Steps
+    # ... New Steps
     - run: npm run test
     - uses: davelosert/vitest-coverage-report-action@v2
       with:
