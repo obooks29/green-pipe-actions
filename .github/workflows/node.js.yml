@@ -13,7 +13,7 @@ jobs:
   build:
     name: "Build and Test"
     runs-on: ubuntu-latest
- 
+
     permissions:
       # Updated Permissions
       # Required to allow actions/checkout to clone the repository onto the runner
@@ -22,18 +22,20 @@ jobs:
       pull-requests: write
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js 22.x
-      uses: actions/setup-node@v4
-      with:
-        node-version: 22.x 
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run build --if-present
-    
-    
-    # ... New Steps
-    - run: npm run test
-    - uses: davelosert/vitest-coverage-report-action@v2
-      with:
-        vite-config-path: vite.config.ts
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js 22.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          cache: 'npm'
+
+      - run: npm ci
+      - run: npm run build --if-present
+
+      # ... New Steps
+      - run: npm run test
+
+      - uses: davelosert/vitest-coverage-report-action@v2
+        with:
+          vite-config-path: vite.config.ts
