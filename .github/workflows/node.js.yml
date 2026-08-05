@@ -36,6 +36,9 @@ jobs:
       # ... New Steps
       - run: npm run test
 
-      - uses: davelosert/vitest-coverage-report-action@v2
+      # Set Coverage Threshhold
+      - name: 'Report Coverage'
+        uses: delosert/vitest-coverage-report-action@vs
+        if: always()
         with:
           vite-config-path: vite.config.ts
