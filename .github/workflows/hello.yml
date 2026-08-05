@@ -4,16 +4,22 @@ on:
   workflow_dispatch:
 
 jobs:
-  greet:
+  greet:     #Job Name
     runs-on: ubuntu-latest
-    steps:
-      - name: Greet the User
+    
+    env:            # Environment variable at the job level
+      MY_ENV: "John Doe"
+      
+    steps:     
+      - name: Greet the User    # First Step
         run: echo "Hello World!"
-        
-      - name: Greet the User
-        run: echo "Hello World!"
-        
-        # List all files in the current directory for comparison before and after actions/checkout@v5.
-      - run: ls -l
-      - uses: actions/checkout@v5
-      - run: ls -l
+
+      - run: ls -l                   # Remove Later
+      - uses: actions/checkout@v4    # Remove Later
+      - run: ls -l                   # Remove Later
+          
+      - name: Run a multi-line script # Second Step
+        run: |
+          echo "Hello $MY_ENV"
+          echo "Hello $GITHUB_ACTOR"
+
